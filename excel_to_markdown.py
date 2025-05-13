@@ -16,6 +16,7 @@ markdown_content = "# 目录结构\n\n"
 # 用于跟踪当前目录
 current_level1 = ""
 current_level2 = ""
+current_level3 = ""
 
 # 遍历每一行
 for index, row in df.iterrows():
@@ -23,19 +24,28 @@ for index, row in df.iterrows():
     level1 = str(row[0]).strip() if pd.notna(row[0]) else ""
     level2 = str(row[1]).strip() if pd.notna(row[1]) else ""
     level3 = str(row[2]).strip() if pd.notna(row[2]) else ""
+    level4 = str(row[3]).strip() if pd.notna(row[3]) else ""
     
     # 只有当目录名称改变时才添加新的目录
     if level1 and level1 != current_level1:
         markdown_content += f"## {level1}\n"
         current_level1 = level1
         current_level2 = ""  # 重置二级目录
+        current_level3 = ""  # 重置三级目录
     
     if level2 and level2 != current_level2:
         markdown_content += f"### {level2}\n"
         current_level2 = level2
+        current_level3 = ""  # 重置三级目录
     
-    if level3:
-        markdown_content += f"- {level3}\n"
+    # 合并第三列和第四列的内容
+    combined_level3 = level3
+    if level4:
+        combined_level3 = f"{level3}：{level4}"
+    
+    if combined_level3 and combined_level3 != current_level3:
+        markdown_content += f"#### {combined_level3}\n"
+        current_level3 = combined_level3
     
     # 添加空行以增加可读性
     markdown_content += "\n"
