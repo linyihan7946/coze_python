@@ -1,8 +1,8 @@
 import pandas as pd
 
 # 读取 Excel 文件
-excel_path = 'C:/Users/Administrator/Desktop/新建 XLSX 工作表.xlsx'
-markdown_path = 'C:/Users/Administrator/Desktop/output.md'
+excel_path = 'C:/Users/Administrator/Desktop/内核组周工作.xlsx'
+markdown_path = 'C:/Users/Administrator/Desktop/内核组周工作.md'
 
 sheet_name = 0
 df = pd.read_excel(excel_path, sheet_name=sheet_name, header=None)
@@ -54,4 +54,4 @@ for index, row in df.iterrows():
 with open(markdown_path, 'w', encoding='utf-8') as f:
     f.write(markdown_content)
 
-print("转换完成，已保存为 output.md") 
+print("转换完成，已保存为 内核组周工作.md") 
